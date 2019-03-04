@@ -62,9 +62,6 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         return "\(degrees).\(fractionalPart)"
     }
     
-    
-    
-    
     // MARK: - UITableViewDelegate/DataSource Implementation
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

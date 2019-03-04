@@ -160,6 +160,7 @@
                         <viewLayoutGuide key="safeArea" id="Kud-GG-EaU"/>
                     </view>
                     <navigationItem key="navigationItem" id="2MK-W6-f96">
+                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="KLf-qR-H6h"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="s7u-JB-idr">
                             <connections>
                                 <segue destination="3lb-dn-X9y" kind="show" id="Izo-Ex-Bsu"/>
@@ -172,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IsA-t8-Ve0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-999.20000000000005" y="-45.073891625615765"/>
+            <point key="canvasLocation" x="-954" y="-45"/>
         </scene>
         <!--Add New City View Controller-->
         <scene sceneID="lb3-F6-mNY">
@@ -191,128 +192,162 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1q-KD-zS0" userLabel="ScrollContent">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="463"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Chippendale" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kgc-p9-Hst">
-                                                        <rect key="frame" x="24" y="45" width="327" height="30"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="tT7-Wp-gnc"/>
-                                                        </connections>
-                                                    </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="City name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1p2-hW-TUe">
-                                                        <rect key="frame" x="24" y="24" width="327" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stormy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6uA-2Q-RH4">
-                                                        <rect key="frame" x="24" y="120" width="327" height="30"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="9Jy-gW-kne"/>
-                                                        </connections>
-                                                    </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Weather conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5s-Ym-C2I">
-                                                        <rect key="frame" x="24" y="99" width="327" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="20°" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x8h-oR-9Ig">
-                                                        <rect key="frame" x="24" y="195" width="327" height="30"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="3Po-8M-1dn"/>
-                                                        </connections>
-                                                    </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Minimum temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAG-js-SoQ">
-                                                        <rect key="frame" x="24" y="174" width="327" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="30°" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hzf-Tv-3T7">
-                                                        <rect key="frame" x="24" y="270" width="327" height="30"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="bwZ-GC-SUU"/>
-                                                        </connections>
-                                                    </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Maximum temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKM-Kh-68f">
-                                                        <rect key="frame" x="24" y="249" width="327" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="25.23%" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gDF-En-Y1J">
-                                                        <rect key="frame" x="24" y="345" width="327" height="30"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="gPM-qa-gUx"/>
-                                                        </connections>
-                                                    </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Humidity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upz-Ws-fxV">
-                                                        <rect key="frame" x="24" y="324" width="327" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kt3-Cx-Fgc">
-                                                        <rect key="frame" x="24" y="399" width="327" height="40"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="MPt-Nl-smQ"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Add City"/>
-                                                        <connections>
-                                                            <action selector="onAddCityPressed:" destination="3lb-dn-X9y" eventType="touchUpInside" id="Ctw-Oq-dXF"/>
-                                                        </connections>
-                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Xtz-1y-EWB">
+                                                        <rect key="frame" x="24" y="24" width="327" height="415"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0EM-ds-QQi">
+                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="51"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="City name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngb-4S-5rM">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Chippendale" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L6W-Yg-fZ5">
+                                                                        <rect key="frame" x="0.0" y="21" width="327" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="WMA-UW-0mG"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Error message" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMh-6G-Kcz">
+                                                                        <rect key="frame" x="0.0" y="51" width="327" height="0.0"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="EfJ-MZ-3Gb">
+                                                                <rect key="frame" x="0.0" y="75" width="327" height="51"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Weather conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rz-4e-Luf">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stormy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S0R-5e-28D">
+                                                                        <rect key="frame" x="0.0" y="21" width="327" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="ss5-02-MVC"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Error message" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDF-tD-wY0">
+                                                                        <rect key="frame" x="0.0" y="51" width="327" height="0.0"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="CUd-sP-M5h">
+                                                                <rect key="frame" x="0.0" y="150" width="327" height="51"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Minimum temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u5-ib-lIW">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="20.12°C" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Hb-hL-flW">
+                                                                        <rect key="frame" x="0.0" y="21" width="327" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="GtG-g7-vWZ"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Error message" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUY-nl-ey2">
+                                                                        <rect key="frame" x="0.0" y="51" width="327" height="0.0"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="B2v-Qe-yk8">
+                                                                <rect key="frame" x="0.0" y="225" width="327" height="51"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Maximum temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1XA-4Q-80E">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="24.21°C" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="10f-Vu-y1J">
+                                                                        <rect key="frame" x="0.0" y="21" width="327" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="I1T-hA-hkD"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Error message" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJT-3f-UnT">
+                                                                        <rect key="frame" x="0.0" y="51" width="327" height="0.0"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Iyp-U0-1Ch">
+                                                                <rect key="frame" x="0.0" y="300" width="327" height="51"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Humidity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvI-SC-U5D">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="12.01%" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T5v-TK-S3K">
+                                                                        <rect key="frame" x="0.0" y="21" width="327" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="3lb-dn-X9y" id="7PM-bm-Uv6"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="890" text="Error message" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6e-cI-bZ2">
+                                                                        <rect key="frame" x="0.0" y="51" width="327" height="0.0"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kt3-Cx-Fgc">
+                                                                <rect key="frame" x="0.0" y="375" width="327" height="40"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="MPt-Nl-smQ"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                <state key="normal" title="Add City">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="onAddCityPressed:" destination="3lb-dn-X9y" eventType="touchUpInside" id="Ctw-Oq-dXF"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="wKM-Kh-68f" firstAttribute="leading" secondItem="Hzf-Tv-3T7" secondAttribute="leading" id="0cL-5w-vf3"/>
-                                                    <constraint firstItem="Kgc-p9-Hst" firstAttribute="leading" secondItem="E1q-KD-zS0" secondAttribute="leading" constant="24" id="0nv-kf-5EZ"/>
-                                                    <constraint firstItem="M5s-Ym-C2I" firstAttribute="trailing" secondItem="6uA-2Q-RH4" secondAttribute="trailing" id="0wA-Q6-ExV"/>
-                                                    <constraint firstItem="kt3-Cx-Fgc" firstAttribute="leading" secondItem="gDF-En-Y1J" secondAttribute="leading" id="22R-Bd-rub"/>
-                                                    <constraint firstItem="gDF-En-Y1J" firstAttribute="leading" secondItem="Hzf-Tv-3T7" secondAttribute="leading" id="2VR-5c-vQ7"/>
-                                                    <constraint firstItem="1p2-hW-TUe" firstAttribute="top" secondItem="E1q-KD-zS0" secondAttribute="top" constant="24" id="3sV-ey-q2v"/>
-                                                    <constraint firstItem="x8h-oR-9Ig" firstAttribute="trailing" secondItem="6uA-2Q-RH4" secondAttribute="trailing" id="6fp-Od-O7L"/>
-                                                    <constraint firstItem="Upz-Ws-fxV" firstAttribute="top" secondItem="Hzf-Tv-3T7" secondAttribute="bottom" constant="24" id="APk-G6-Jxn"/>
-                                                    <constraint firstItem="kt3-Cx-Fgc" firstAttribute="trailing" secondItem="gDF-En-Y1J" secondAttribute="trailing" id="Aac-HV-erE"/>
-                                                    <constraint firstItem="Hzf-Tv-3T7" firstAttribute="leading" secondItem="x8h-oR-9Ig" secondAttribute="leading" id="BHG-8V-2Z5"/>
-                                                    <constraint firstItem="Hzf-Tv-3T7" firstAttribute="top" secondItem="wKM-Kh-68f" secondAttribute="bottom" constant="4" id="BPT-uR-Iez"/>
-                                                    <constraint firstItem="XAG-js-SoQ" firstAttribute="top" secondItem="6uA-2Q-RH4" secondAttribute="bottom" constant="24" id="Bp1-rd-uOZ"/>
-                                                    <constraint firstItem="gDF-En-Y1J" firstAttribute="top" secondItem="Upz-Ws-fxV" secondAttribute="bottom" constant="4" id="FjX-8S-lH3"/>
-                                                    <constraint firstItem="6uA-2Q-RH4" firstAttribute="trailing" secondItem="Kgc-p9-Hst" secondAttribute="trailing" id="HRF-u7-1Ic"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Kgc-p9-Hst" secondAttribute="trailing" constant="24" id="IjR-xn-fJT"/>
-                                                    <constraint firstItem="Upz-Ws-fxV" firstAttribute="leading" secondItem="gDF-En-Y1J" secondAttribute="leading" id="NIC-Ko-lGk"/>
-                                                    <constraint firstItem="wKM-Kh-68f" firstAttribute="top" secondItem="x8h-oR-9Ig" secondAttribute="bottom" constant="24" id="O5h-sR-q7O"/>
-                                                    <constraint firstItem="x8h-oR-9Ig" firstAttribute="top" secondItem="XAG-js-SoQ" secondAttribute="bottom" constant="4" id="RYY-cq-1nm"/>
-                                                    <constraint firstItem="XAG-js-SoQ" firstAttribute="trailing" secondItem="x8h-oR-9Ig" secondAttribute="trailing" id="UAx-be-aGy"/>
-                                                    <constraint firstItem="Hzf-Tv-3T7" firstAttribute="trailing" secondItem="x8h-oR-9Ig" secondAttribute="trailing" id="Vb7-WL-TMh"/>
-                                                    <constraint firstItem="x8h-oR-9Ig" firstAttribute="leading" secondItem="6uA-2Q-RH4" secondAttribute="leading" id="WFe-3c-cF7"/>
-                                                    <constraint firstItem="6uA-2Q-RH4" firstAttribute="leading" secondItem="Kgc-p9-Hst" secondAttribute="leading" id="WTv-fm-FTm"/>
-                                                    <constraint firstItem="Upz-Ws-fxV" firstAttribute="trailing" secondItem="gDF-En-Y1J" secondAttribute="trailing" id="Wbs-on-VHD"/>
-                                                    <constraint firstItem="wKM-Kh-68f" firstAttribute="trailing" secondItem="Hzf-Tv-3T7" secondAttribute="trailing" id="hdQ-DW-KzG"/>
-                                                    <constraint firstItem="1p2-hW-TUe" firstAttribute="trailing" secondItem="Kgc-p9-Hst" secondAttribute="trailing" id="iyw-nH-5XU"/>
-                                                    <constraint firstItem="6uA-2Q-RH4" firstAttribute="top" secondItem="M5s-Ym-C2I" secondAttribute="bottom" constant="4" id="kAl-gY-caX"/>
-                                                    <constraint firstItem="M5s-Ym-C2I" firstAttribute="top" secondItem="Kgc-p9-Hst" secondAttribute="bottom" constant="24" id="kmh-Ot-qPn"/>
-                                                    <constraint firstItem="gDF-En-Y1J" firstAttribute="trailing" secondItem="Hzf-Tv-3T7" secondAttribute="trailing" id="ljL-cQ-AJE"/>
-                                                    <constraint firstItem="kt3-Cx-Fgc" firstAttribute="top" secondItem="gDF-En-Y1J" secondAttribute="bottom" constant="24" id="o6N-lB-TT4"/>
-                                                    <constraint firstItem="Kgc-p9-Hst" firstAttribute="top" secondItem="1p2-hW-TUe" secondAttribute="bottom" constant="4" id="oQQ-RH-yQ5"/>
-                                                    <constraint firstItem="XAG-js-SoQ" firstAttribute="leading" secondItem="x8h-oR-9Ig" secondAttribute="leading" id="pA9-y9-wKZ"/>
-                                                    <constraint firstItem="1p2-hW-TUe" firstAttribute="leading" secondItem="Kgc-p9-Hst" secondAttribute="leading" id="s30-Gc-Lyy"/>
-                                                    <constraint firstItem="M5s-Ym-C2I" firstAttribute="leading" secondItem="6uA-2Q-RH4" secondAttribute="leading" id="vT1-sT-oYh"/>
-                                                    <constraint firstAttribute="bottom" secondItem="kt3-Cx-Fgc" secondAttribute="bottom" constant="24" id="wcg-hB-2Sw"/>
+                                                    <constraint firstItem="Xtz-1y-EWB" firstAttribute="leading" secondItem="E1q-KD-zS0" secondAttribute="leading" constant="24" id="8ju-IX-ITT"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Xtz-1y-EWB" secondAttribute="trailing" constant="24" id="BCd-yV-Gd8"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Xtz-1y-EWB" secondAttribute="bottom" constant="24" id="HS6-LV-cWS"/>
+                                                    <constraint firstItem="Xtz-1y-EWB" firstAttribute="top" secondItem="E1q-KD-zS0" secondAttribute="top" constant="24" id="JGf-uZ-WCy"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -345,17 +380,22 @@
                     </view>
                     <connections>
                         <outlet property="btnAddCity" destination="kt3-Cx-Fgc" id="Yae-v1-Vyo"/>
+                        <outlet property="lblCityNameError" destination="WMh-6G-Kcz" id="bsa-R0-tcr"/>
+                        <outlet property="lblHumidityError" destination="f6e-cI-bZ2" id="9JX-TD-RLT"/>
+                        <outlet property="lblMaximumTemperatureError" destination="yJT-3f-UnT" id="Mdz-wI-cbq"/>
+                        <outlet property="lblMinimumTemperatureError" destination="HUY-nl-ey2" id="OW5-g9-EWg"/>
+                        <outlet property="lblWeatherConditionsError" destination="sDF-tD-wY0" id="aku-ve-2Ea"/>
                         <outlet property="scrollView" destination="h0L-za-aC0" id="nhI-Ye-bs8"/>
-                        <outlet property="txtCityName" destination="Kgc-p9-Hst" id="2G5-5E-ig1"/>
-                        <outlet property="txtHumidity" destination="gDF-En-Y1J" id="P3y-0i-TEp"/>
-                        <outlet property="txtMaximumTemperature" destination="Hzf-Tv-3T7" id="Ms1-T9-vrn"/>
-                        <outlet property="txtMinimumTemperature" destination="x8h-oR-9Ig" id="We4-FQ-EJy"/>
-                        <outlet property="txtWeatherConditions" destination="6uA-2Q-RH4" id="PNM-0j-mcw"/>
+                        <outlet property="txtCityName" destination="L6W-Yg-fZ5" id="nTu-DT-SvZ"/>
+                        <outlet property="txtHumidity" destination="T5v-TK-S3K" id="NhI-Ik-7Kh"/>
+                        <outlet property="txtMaximumTemperature" destination="10f-Vu-y1J" id="Tkj-AW-oEW"/>
+                        <outlet property="txtMinimumTemperature" destination="4Hb-hL-flW" id="mT0-n3-DIo"/>
+                        <outlet property="txtWeatherConditions" destination="S0R-5e-28D" id="He6-27-KgC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3wa-9z-ajO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-212" y="-45"/>
+            <point key="canvasLocation" x="-174" y="-45"/>
         </scene>
     </scenes>
 </document>

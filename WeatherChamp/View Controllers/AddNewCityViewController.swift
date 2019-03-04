@@ -19,12 +19,20 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
     
     // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView?
+    
     @IBOutlet weak var txtCityName: UITextField?
     @IBOutlet weak var txtWeatherConditions: UITextField?
     @IBOutlet weak var txtMinimumTemperature: UITextField?
     @IBOutlet weak var txtMaximumTemperature: UITextField?
     @IBOutlet weak var txtHumidity: UITextField?
     @IBOutlet weak var btnAddCity: UIButton?
+    
+    @IBOutlet weak var lblCityNameError: UILabel?
+    @IBOutlet weak var lblWeatherConditionsError: UILabel?
+    @IBOutlet weak var lblMinimumTemperatureError: UILabel?
+    @IBOutlet weak var lblMaximumTemperatureError: UILabel?
+    @IBOutlet weak var lblHumidityError: UILabel?
+    
 
     // MARK: - Properties
     

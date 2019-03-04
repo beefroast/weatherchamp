@@ -21,6 +21,7 @@
 		64533DE7222CD7ED00AB87BB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64533DE6222CD7ED00AB87BB /* Model.swift */; };
 		64533DE9222CD7F900AB87BB /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64533DE8222CD7F900AB87BB /* City.swift */; };
 		64533DEB222CDF7C00AB87BB /* AddNewCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64533DEA222CDF7C00AB87BB /* AddNewCityViewController.swift */; };
+		64C0B5B1222DE73700B4EA99 /* TextFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C0B5B0222DE73700B4EA99 /* TextFieldValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		64533DE6222CD7ED00AB87BB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		64533DE8222CD7F900AB87BB /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		64533DEA222CDF7C00AB87BB /* AddNewCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCityViewController.swift; sourceTree = "<group>"; };
+		64C0B5B0222DE73700B4EA99 /* TextFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		6408CE9E222CD0A1000B2F3A /* WeatherChamp */ = {
 			isa = PBXGroup;
 			children = (
+				64C0B5AF222DE72900B4EA99 /* Utility */,
 				640B5A24222CEAC300D87A09 /* Storage */,
 				640B5A23222CEAB600D87A09 /* View Controllers */,
 				64533DE5222CD7E100AB87BB /* Model */,
@@ -168,6 +171,14 @@
 				64533DE8222CD7F900AB87BB /* City.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		64C0B5AF222DE72900B4EA99 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				64C0B5B0222DE73700B4EA99 /* TextFieldValidator.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64C0B5B1222DE73700B4EA99 /* TextFieldValidator.swift in Sources */,
 				64533DE7222CD7ED00AB87BB /* Model.swift in Sources */,
 				64533DE2222CD24B00AB87BB /* CityWeatherViewController.swift in Sources */,
 				64533DE9222CD7F900AB87BB /* City.swift in Sources */,
