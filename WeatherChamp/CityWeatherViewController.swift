@@ -14,30 +14,86 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView?
     
+    var cityList: [Model.City]? {
+        didSet {
+            self.tableView?.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Temporary testing line
+        self.cityList = [
+            Model.City(
+                name: "Chippendale",
+                condition: .storm,
+                minTemperature: 1234,
+                maxTemperature: 2345,
+                humidity: 3456
+            )
+        ]
+    }
+    
+    
+    // MARK: - Helper methods
+    
+    func cityFor(indexPath: IndexPath) -> Model.City? {
+        guard let list = self.cityList,
+            indexPath.row < list.count else {
+            return nil
+        }
+        return list[indexPath.row]
+    }
+    
+    func weatherDescriptionFor(condition: Model.City.Condition) -> String {
+        // TODO: Implement a nice description
+        return "\(condition)"
+    }
+    
+    func displayableValueFrom(hundredths: Int) -> String {
+        // We could optionally show less significant digits, but
+        // let's be consistent for the time being.
+        let fractionalPart = hundredths % 100
+        let degrees = hundredths / 100
+        return "\(degrees).\(fractionalPart)"
     }
     
     
     // MARK: - UITableViewDelegate/DataSource Implementation
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.cityList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            as? CityTableViewCell else {
+        let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        
+        guard let cell = dequeuedCell as? CityTableViewCell,
+            let city = self.cityFor(indexPath: indexPath) else {
+                
+                // Return an empty cell to avoid crashing here
                 return UITableViewCell()
         }
         
-        // TODO: Apply data to cell
+        // TODO: This could be moved, it'll be fine here for now...
+        cell.lblCityTitle?.text = city.name
+        cell.lblWeatherType?.text = self.weatherDescriptionFor(condition: city.condition)
+        cell.lblHumidity?.text = "\(self.displayableValueFrom(hundredths: city.humidity))%"
+        cell.lblMinimumTemp?.text = "\(self.displayableValueFrom(hundredths: city.minTemperature))°"
+        cell.lblMaximumTemp?.text = "\(self.displayableValueFrom(hundredths: city.maxTemperature))°"
         
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 165
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 
 }
