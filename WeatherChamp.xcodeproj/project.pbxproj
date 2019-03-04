@@ -14,6 +14,7 @@
 		6408CEAD222CD0A4000B2F3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6408CEAB222CD0A4000B2F3A /* LaunchScreen.storyboard */; };
 		6408CEB8222CD0A4000B2F3A /* WeatherChampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6408CEB7222CD0A4000B2F3A /* WeatherChampTests.swift */; };
 		6408CEC3222CD0A4000B2F3A /* WeatherChampUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6408CEC2222CD0A4000B2F3A /* WeatherChampUITests.swift */; };
+		640B5A26222CEAD800D87A09 /* StorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640B5A25222CEAD800D87A09 /* StorageController.swift */; };
 		64533DE2222CD24B00AB87BB /* CityWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64533DE1222CD24B00AB87BB /* CityWeatherViewController.swift */; };
 		64533DE4222CD5B800AB87BB /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64533DE3222CD5B800AB87BB /* CityTableViewCell.swift */; };
 		64533DE7222CD7ED00AB87BB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64533DE6222CD7ED00AB87BB /* Model.swift */; };
@@ -52,6 +53,7 @@
 		6408CEBE222CD0A4000B2F3A /* WeatherChampUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherChampUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6408CEC2222CD0A4000B2F3A /* WeatherChampUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherChampUITests.swift; sourceTree = "<group>"; };
 		6408CEC4222CD0A4000B2F3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		640B5A25222CEAD800D87A09 /* StorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
 		64533DE1222CD24B00AB87BB /* CityWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeatherViewController.swift; sourceTree = "<group>"; };
 		64533DE3222CD5B800AB87BB /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		64533DE6222CD7ED00AB87BB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -107,12 +109,10 @@
 		6408CE9E222CD0A1000B2F3A /* WeatherChamp */ = {
 			isa = PBXGroup;
 			children = (
+				640B5A24222CEAC300D87A09 /* Storage */,
+				640B5A23222CEAB600D87A09 /* View Controllers */,
 				64533DE5222CD7E100AB87BB /* Model */,
 				6408CE9F222CD0A1000B2F3A /* AppDelegate.swift */,
-				64533DE1222CD24B00AB87BB /* CityWeatherViewController.swift */,
-				64533DEA222CDF7C00AB87BB /* AddNewCityViewController.swift */,
-				64533DE3222CD5B800AB87BB /* CityTableViewCell.swift */,
-				6408CEA3222CD0A1000B2F3A /* Main.storyboard */,
 				6408CEA9222CD0A4000B2F3A /* Assets.xcassets */,
 				6408CEAB222CD0A4000B2F3A /* LaunchScreen.storyboard */,
 				6408CEAE222CD0A4000B2F3A /* Info.plist */,
@@ -137,6 +137,25 @@
 				6408CEC4222CD0A4000B2F3A /* Info.plist */,
 			);
 			path = WeatherChampUITests;
+			sourceTree = "<group>";
+		};
+		640B5A23222CEAB600D87A09 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				64533DE1222CD24B00AB87BB /* CityWeatherViewController.swift */,
+				64533DEA222CDF7C00AB87BB /* AddNewCityViewController.swift */,
+				64533DE3222CD5B800AB87BB /* CityTableViewCell.swift */,
+				6408CEA3222CD0A1000B2F3A /* Main.storyboard */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		640B5A24222CEAC300D87A09 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				640B5A25222CEAD800D87A09 /* StorageController.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		64533DE5222CD7E100AB87BB /* Model */ = {
@@ -282,6 +301,7 @@
 				64533DE7222CD7ED00AB87BB /* Model.swift in Sources */,
 				64533DE2222CD24B00AB87BB /* CityWeatherViewController.swift in Sources */,
 				64533DE9222CD7F900AB87BB /* City.swift in Sources */,
+				640B5A26222CEAD800D87A09 /* StorageController.swift in Sources */,
 				6408CEA8222CD0A1000B2F3A /* WeatherChamp.xcdatamodeld in Sources */,
 				64533DEB222CDF7C00AB87BB /* AddNewCityViewController.swift in Sources */,
 				64533DE4222CD5B800AB87BB /* CityTableViewCell.swift in Sources */,
