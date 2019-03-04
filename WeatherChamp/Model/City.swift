@@ -12,14 +12,15 @@ import Foundation
 extension Model {
     
     class City {
-    
-        enum Condition: CaseIterable {
+        
+        enum Condition: String, Encodable, CaseIterable {
             case sunny
             case cloudy
             case rainy
             case hail
             case snow
             case storm
+            case acidRain
         }
         
         let name: String

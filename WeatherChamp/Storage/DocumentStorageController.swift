@@ -9,26 +9,135 @@
 import Foundation
 
 
+
+
 class DocumentStorageController: StorageController {
     
+    let fileName = "cities.json"
+    fileprivate var cityList: [EncodableCity] = []
+    lazy var fileManager = FileManager.default
+    
+    
+    enum DocumentError: Error {
+        case couldNotFindDocumentsPath
+    }
+    
+    init() {
+        do {
+            // Attempt to read the cities from storage
+            try self.readAllCities()
+        } catch (_) {
+            // Do nothing, we can't read the cities so we
+            // just use an empty list for now...
+        }
+    }
+    
+    // MARK: - Private methods
+    
+    func getFilePath() throws -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        guard let documentsDirectory = paths.first else {
+            throw DocumentError.couldNotFindDocumentsPath
+        }
+        return documentsDirectory.appendingPathComponent(fileName)
+    }
+    
+    func writeAllCities() throws -> Void {
+        let path = try getFilePath()
+        let data = try JSONEncoder().encode(self.cityList)
+        try data.write(to: path)
+    }
+    
+    func readAllCities() throws -> Void {
+        let path = try getFilePath()
+        let data = try Data.init(contentsOf: path, options: [])
+        let cities = try JSONDecoder().decode(Array<EncodableCity>.self, from: data)
+        self.cityList = cities
+    }
+    
+    // MARK: - StorageController Implementation
+    
     func save(city: Model.City) throws {
-        // TODO: Save
+        
+        // Create an encodable version of the city
+        // and append it to the list
+        let encodable = EncodableCity.from(city: city)
+        cityList.append(encodable)
+        
+        // Write
+        try self.writeAllCities()
     }
     
     func delete(city: Model.City) throws {
-        // TODO: Delete
+        
+        
     }
     
     func getCities() throws -> [Model.City] {
-        return [
-            Model.City(
-                name: "A Very Long City Name, And Some More Text Just To Be Sure",
-                condition: .storm,
-                minTemperature: 1234,
-                maxTemperature: 2345,
-                humidity: 3456
-            )
-        ]
+        return cityList
+    }
+}
+
+class EncodableCity: Model.City, Encodable, Decodable {
+    
+    private enum CodingKeys: String, CodingKey {
+        case name
+        case condition
+        case minTemperature
+        case maxTemperature
+        case humidity
+    }
+    
+    static func from(city: Model.City) -> EncodableCity {
+        return EncodableCity(
+            name: city.name,
+            condition: city.condition,
+            minTemperature: city.minTemperature,
+            maxTemperature: city.maxTemperature,
+            humidity: city.humidity
+        )
+    }
+    
+    override init(
+        name: String,
+        condition: Condition,
+        minTemperature: Int,
+        maxTemperature: Int,
+        humidity: Int) {
+        
+        super.init(
+            name: name,
+            condition: condition,
+            minTemperature: minTemperature,
+            maxTemperature: maxTemperature,
+            humidity: humidity
+        )
+    }
+    
+    required init(from decoder: Decoder) throws {
+        
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let name = try values.decode(String.self, forKey: .name)
+        let minTemperature = try values.decode(Int.self, forKey: .minTemperature)
+        let maxTemperature = try values.decode(Int.self, forKey: .maxTemperature)
+        let humidity = try values.decode(Int.self, forKey: .humidity)
+        
+        super.init(
+            name: name,
+            condition: .acidRain, // TODO: Represent me correctly
+            minTemperature: minTemperature,
+            maxTemperature: maxTemperature,
+            humidity: humidity
+        )
     }
    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(self.name, forKey: .name)
+        try container.encode(self.minTemperature, forKey: .minTemperature)
+        try container.encode(self.maxTemperature, forKey: .maxTemperature)
+        try container.encode(self.humidity, forKey: .humidity)
+    }
 }

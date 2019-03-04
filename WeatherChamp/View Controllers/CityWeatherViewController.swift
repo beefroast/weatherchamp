@@ -110,6 +110,12 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         // TODO: Pass this along to our delegate so it can be saved
         self.cityList?.insert(enteredCity, at: 0)
         
+        do {
+            try self.storage.save(city: enteredCity)
+        } catch (_) {
+            // Do nothing
+        }
+        
         self.navigationController?.popToViewController(self, animated: true)
     }
     
