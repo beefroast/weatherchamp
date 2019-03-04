@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddNewCityViewControllerDelegate {
 
     let cellIdentifier = "cityCell"
     
@@ -19,6 +19,9 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
             self.tableView?.reloadData()
         }
     }
+    
+    
+    // MARK: - UIViewController methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,12 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
                 humidity: 3456
             )
         ]
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? AddNewCityViewController {
+            vc.delegate = self
+        }
     }
     
     
@@ -96,6 +105,17 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         return UITableView.automaticDimension
     }
     
+    
+    // MARK: - AddNewCityViewControllerDelegate Implementation
+    
+    func addNewCity(vc: AddNewCityViewController, enteredCity: Model.City) {
+        
+        // TODO: Pass this along to our delegate so it can be saved
+        
+        self.cityList?.insert(enteredCity, at: 0)
+        
+        self.navigationController?.popToViewController(self, animated: true)
+    }
     
 
 }

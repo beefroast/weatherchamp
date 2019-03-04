@@ -9,9 +9,13 @@
 import UIKit
 
 
+protocol AddNewCityViewControllerDelegate: AnyObject {
+    func addNewCity(vc: AddNewCityViewController, enteredCity: Model.City)
+}
 
 class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    weak var delegate: AddNewCityViewControllerDelegate? = nil
     
     // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView?
@@ -167,7 +171,18 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
     // MARK: - Actions
     
     @IBAction func onAddCityPressed(_ sender: Any) {
-        // TODO: Implement me
+        
+        // TODO: Validate the input...
+        
+        let enteredCity = Model.City.init(
+            name: self.txtCityName?.text ?? "Unnamned",
+            condition: self.selectedWeatherCondition!,
+            minTemperature: 1234,
+            maxTemperature: 2345,
+            humidity: 3456
+        )
+        
+        self.delegate?.addNewCity(vc: self, enteredCity: enteredCity)
     }
     
 
