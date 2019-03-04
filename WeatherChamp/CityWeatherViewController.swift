@@ -26,7 +26,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         // Temporary testing line
         self.cityList = [
             Model.City(
-                name: "Chippendale",
+                name: "A Very Long City Name, And Some More Text Just To Be Sure",
                 condition: .storm,
                 minTemperature: 1234,
                 maxTemperature: 2345,
@@ -95,5 +95,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    
 
 }
