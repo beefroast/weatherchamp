@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class AddNewCityViewController: UIViewController {
+class AddNewCityViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView?
     @IBOutlet weak var txtCityName: UITextField?
@@ -20,6 +20,13 @@ class AddNewCityViewController: UIViewController {
     @IBOutlet weak var txtHumidity: UITextField?
     @IBOutlet weak var btnAddCity: UIButton?
 
+    lazy var orderedTextFields = [
+        self.txtCityName,
+        self.txtWeatherConditions,
+        self.txtMinimumTemperature,
+        self.txtMaximumTemperature,
+        self.txtHumidity
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +41,8 @@ class AddNewCityViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // MARK: - Helper methods
+
     // MARK: - Keyboard notification handling
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -51,6 +60,37 @@ class AddNewCityViewController: UIViewController {
             self.scrollView?.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: keyboardHeight, right: 0)
         }
     }
+    
+    // MARK: - UITextFieldDelegate Implementation
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        DispatchQueue.main.async {
+            self.moveToTextField(after: textField)
+        }
+        
+        return true
+    }
+    
+    
+    func moveToTextField(after: UITextField) {
+        
+        guard let textFieldIndex = self.orderedTextFields.firstIndex(of: after) else {
+            // Do nothing this text field isn't part of this form
+            return
+        }
+        
+        let nextIdx = textFieldIndex + 1
+        
+        guard nextIdx < self.orderedTextFields.count else {
+            // There is no next text field, we just dismiss the keyboard
+            self.view.endEditing(true)
+            return
+        }
+        
+        self.orderedTextFields[nextIdx]?.becomeFirstResponder()
+    }
+    
     
     // MARK: - Actions
     
