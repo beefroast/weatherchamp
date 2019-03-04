@@ -11,7 +11,7 @@ import Foundation
 
 
 
-class DocumentStorageController: StorageController {
+class DocumentStorageController: StorageController {    
     
     let fileName = "cities.json"
     fileprivate var cityList: [EncodableCity] = []
@@ -57,7 +57,7 @@ class DocumentStorageController: StorageController {
     
     // MARK: - StorageController Implementation
     
-    func save(city: Model.City) throws {
+    func save(city: Model.City) throws -> Model.City {
         
         // Create an encodable version of the city
         // and append it to the list
@@ -66,11 +66,24 @@ class DocumentStorageController: StorageController {
         
         // Write
         try self.writeAllCities()
+        
+        // Return the encodable city
+        return encodable
     }
     
     func delete(city: Model.City) throws {
         
+        // Remove the city from the list
+        self.cityList.removeAll { (savedCity) -> Bool in
+            
+            // This is very cheeky, I know that all the saved cities in the list
+            // will be 'EncodableCities', so I can do this...
+            // Should probably move towards using UUIDs to identifier cities.
+            savedCity === city
+        }
         
+        // Write
+        try self.writeAllCities()
     }
     
     func getCities() throws -> [Model.City] {

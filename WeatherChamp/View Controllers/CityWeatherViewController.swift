@@ -14,11 +14,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView?
     
-    var cityList: [Model.City]? {
-        didSet {
-            self.tableView?.reloadData()
-        }
-    }
+    var cityList: [Model.City]?
     
     // NOTE: This could be injected, for now we just instantiate it here
     lazy var storage: StorageController = DocumentStorageController()
@@ -30,6 +26,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
 
         do {
             self.cityList = try self.storage.getCities()
+            self.tableView?.reloadData()
         } catch (let error) {
             // TODO: We could handle displaying an error to the user
         }
@@ -64,6 +61,8 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         let degrees = hundredths / 100
         return "\(degrees).\(fractionalPart)"
     }
+    
+    
     
     
     // MARK: - UITableViewDelegate/DataSource Implementation
@@ -102,16 +101,45 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         return UITableView.automaticDimension
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            guard let city = self.cityFor(indexPath: indexPath) else { return }
+            
+            let alertCon = UIAlertController(
+                title: "Confirm",
+                message: "Are you sure you want to delete \(city.name)?",
+                preferredStyle: UIAlertController.Style.alert
+            )
+            
+            alertCon.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (_) in
+                // Do nothing
+            }))
+            
+            alertCon.addAction(UIAlertAction.init(title: "Delete", style: .destructive, handler: { (_) in
+                
+                do {
+                    try self.storage.delete(city: city)
+                    self.cityList?.removeAll(where: { $0 === city })
+                    self.tableView?.deleteRows(at: [indexPath], with: .none)
+                } catch (_) {
+                    // TODO: Handle problem deleting in here...
+                }
+            }))
+            
+            self.present(alertCon, animated: true, completion: nil)
+        }
+    }
+    
     
     // MARK: - AddNewCityViewControllerDelegate Implementation
     
     func addNewCity(vc: AddNewCityViewController, enteredCity: Model.City) {
         
-        // TODO: Pass this along to our delegate so it can be saved
-        self.cityList?.insert(enteredCity, at: 0)
-        
         do {
-            try self.storage.save(city: enteredCity)
+            let newCity = try self.storage.save(city: enteredCity)
+            self.cityList?.insert(newCity, at: 0)
+            self.tableView?.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .none)
         } catch (_) {
             // Do nothing
         }
