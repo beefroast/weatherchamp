@@ -24,9 +24,9 @@ extension Model {
         
         let name: String
         let condition: Condition
-        let minTemperature: Int
-        let maxTemperature: Int
-        let humidity: Int
+        let minTemperature: Int     // Expressed as hundredths of a degree
+        let maxTemperature: Int     // i.e. the value 2412 will indicate a temperature
+        let humidity: Int           // of 24.12 etc.
         
         init(
             name: String,
