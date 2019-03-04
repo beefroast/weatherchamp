@@ -17,5 +17,5 @@ protocol StorageController {
     
     func save(city: Model.City) throws
     func delete(city: Model.City) throws
-    func getCities() throws -> [Model.City] 
+    func getCities() throws -> [Model.City]
 }

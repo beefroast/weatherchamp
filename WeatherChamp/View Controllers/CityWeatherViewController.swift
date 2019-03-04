@@ -20,22 +20,19 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    // NOTE: This could be injected, for now we just instantiate it here
+    lazy var storage: StorageController = DocumentStorageController()
     
     // MARK: - UIViewController methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Temporary testing line
-        self.cityList = [
-            Model.City(
-                name: "A Very Long City Name, And Some More Text Just To Be Sure",
-                condition: .storm,
-                minTemperature: 1234,
-                maxTemperature: 2345,
-                humidity: 3456
-            )
-        ]
+
+        do {
+            self.cityList = try self.storage.getCities()
+        } catch (let error) {
+            // TODO: We could handle displaying an error to the user
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -111,7 +108,6 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
     func addNewCity(vc: AddNewCityViewController, enteredCity: Model.City) {
         
         // TODO: Pass this along to our delegate so it can be saved
-        
         self.cityList?.insert(enteredCity, at: 0)
         
         self.navigationController?.popToViewController(self, animated: true)
