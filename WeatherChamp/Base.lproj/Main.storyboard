@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-1751" y="-45"/>
         </scene>
-        <!--View Controller-->
+        <!--City Weather View Controller-->
         <scene sceneID="68g-0h-EE1">
             <objects>
-                <viewController id="MLh-vQ-GmN" sceneMemberID="viewController">
+                <viewController id="MLh-vQ-GmN" customClass="CityWeatherViewController" customModule="WeatherChamp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mNe-6J-lOx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,7 +38,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="165" id="7FR-H2-ZiS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="165" id="7FR-H2-ZiS" customClass="CityTableViewCell" customModule="WeatherChamp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7FR-H2-ZiS" id="h7S-ij-LW0">
@@ -134,6 +134,14 @@
                                                 <constraint firstItem="tbN-Ax-laK" firstAttribute="top" secondItem="h7S-ij-LW0" secondAttribute="topMargin" constant="8" id="yia-fQ-MLa"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgWeatherType" destination="tbN-Ax-laK" id="JYq-kb-kjk"/>
+                                            <outlet property="lblCityTitle" destination="HOx-tk-0ow" id="vvY-Mo-YTg"/>
+                                            <outlet property="lblHumidity" destination="zPa-LW-hS8" id="GLE-q6-3Uf"/>
+                                            <outlet property="lblMaximumTemp" destination="zW8-RW-YmD" id="Gzo-Hh-zge"/>
+                                            <outlet property="lblMinimumTemp" destination="eEr-Is-qog" id="KiP-TH-wSm"/>
+                                            <outlet property="lblWeatherType" destination="xTT-L7-4dl" id="XyP-jN-FC5"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
