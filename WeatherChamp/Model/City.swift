@@ -51,5 +51,17 @@ extension Model {
             let degrees = hundredths / 100
             return "\(degrees).\(abs(fractionalPart))"
         }
+        
+        static func displayableValueFrom(condition: Condition) -> String {
+            switch condition {
+            case .sunny: return "Sunny"
+            case .cloudy: return "Cloudy"
+            case .rainy: return "Rainy"
+            case .hail: return "Hail"
+            case .snow: return "Snow"
+            case .storm: return "Stormy"
+            case .acidRain: return "Acid Rain"
+            }
+        }
     }
 }

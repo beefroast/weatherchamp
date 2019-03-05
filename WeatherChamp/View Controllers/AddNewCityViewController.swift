@@ -56,10 +56,13 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
     
     var selectedWeatherCondition: Model.City.Condition? = nil {
         didSet {
-            // TODO: This could be a bit better
-            self.txtWeatherConditions?.text = self.selectedWeatherCondition.map({ "\($0)" })
+            self.txtWeatherConditions?.text = selectedWeatherCondition.map({ (condition) -> String in
+                Model.City.displayableValueFrom(condition: condition)
+            })
         }
     }
+    
+    var scrollViewBottomInset: CGFloat = 0
 
     
     // MARK: - UIViewControllerLifeCycle Methods
@@ -74,6 +77,9 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
         // Set up the custom pickers for the inputs
         self.setupConditionsPicker()
         self.selectedWeatherCondition = Model.City.Condition.allCases.first
+        
+        // Remember what the default scroll view bottom inset is
+        self.scrollViewBottomInset = self.scrollView?.contentInset.bottom ?? 0
     }
     
     deinit {
@@ -130,7 +136,8 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(Model.City.Condition.allCases[row])"
+        let condition = Model.City.Condition.allCases[row]
+        return Model.City.displayableValueFrom(condition: condition)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -149,11 +156,7 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            self.scrollView?.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-        }
+        self.scrollView?.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: scrollViewBottomInset, right: 0)
     }
     
     // MARK: - UITextFieldDelegate Implementation

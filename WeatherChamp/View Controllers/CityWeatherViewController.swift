@@ -53,11 +53,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         }
         return list[indexPath.row]
     }
-    
-    func weatherDescriptionFor(condition: Model.City.Condition) -> String {
-        // TODO: Implement a nice description
-        return "\(condition)"
-    }
+
     
     // MARK: - UITableViewDelegate/DataSource Implementation
     
@@ -78,7 +74,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         
         // TODO: This could be moved, it'll be fine here for now...
         cell.lblCityTitle?.text = city.name
-        cell.lblWeatherType?.text = self.weatherDescriptionFor(condition: city.condition)
+        cell.lblWeatherType?.text = Model.City.displayableValueFrom(condition: city.condition)
         cell.lblHumidity?.text = "\(Model.City.displayableValueFrom(hundredths: city.humidity))%"
         cell.lblMinimumTemp?.text = "\(Model.City.displayableValueFrom(hundredths: city.minTemperature))°C"
         cell.lblMaximumTemp?.text = "\(Model.City.displayableValueFrom(hundredths: city.maxTemperature))°C"
