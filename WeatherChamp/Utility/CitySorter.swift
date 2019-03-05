@@ -13,7 +13,7 @@ class CitySorter {
     
     func isOrderedBeforeAlphabetically(cityA: Model.City, cityB: Model.City) -> Bool {
         // Perform lexographical compare
-        return cityA.name < cityB.name
+        return cityA.name.lowercased() < cityB.name.lowercased()
     }
     
     func isOrderedBeforeByMinTemperature(cityA: Model.City, cityB: Model.City) -> Bool {

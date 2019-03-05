@@ -147,7 +147,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         let alertCon = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
         
         alertCon.addAction(UIAlertAction(
-            title: "None",
+            title: "City Name",
             style: .default,
             handler: { (_) in
                 self.cityList = self.cityList?.withOrderedBefore(orderedBefore: { (a, b) -> Bool in
