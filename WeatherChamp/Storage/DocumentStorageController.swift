@@ -135,10 +135,18 @@ class EncodableCity: Model.City, Encodable, Decodable {
         let minTemperature = try values.decode(Int.self, forKey: .minTemperature)
         let maxTemperature = try values.decode(Int.self, forKey: .maxTemperature)
         let humidity = try values.decode(Int.self, forKey: .humidity)
+        let conditionString = try values.decode(String.self, forKey: .condition)
+        guard let condition = Condition(rawValue: conditionString) else {
+            throw DecodingError.dataCorruptedError(
+                forKey: .condition,
+                in: values,
+                debugDescription: "Invalid weather condition: \(conditionString)"
+            )
+        }
         
         super.init(
             name: name,
-            condition: .acidRain, // TODO: Represent me correctly
+            condition: condition,
             minTemperature: minTemperature,
             maxTemperature: maxTemperature,
             humidity: humidity
@@ -152,5 +160,6 @@ class EncodableCity: Model.City, Encodable, Decodable {
         try container.encode(self.minTemperature, forKey: .minTemperature)
         try container.encode(self.maxTemperature, forKey: .maxTemperature)
         try container.encode(self.humidity, forKey: .humidity)
+        try container.encode(self.condition.rawValue, forKey: .condition)
     }
 }

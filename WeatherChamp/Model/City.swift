@@ -13,7 +13,7 @@ extension Model {
     
     class City {
         
-        enum Condition: String, Encodable, CaseIterable {
+        enum Condition: String, CaseIterable {
             case sunny
             case cloudy
             case rainy
