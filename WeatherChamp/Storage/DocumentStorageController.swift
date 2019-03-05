@@ -13,7 +13,7 @@ import Foundation
 
 class DocumentStorageController: StorageController {    
     
-    let fileName = "cities.json"
+    let fileName: String
     fileprivate var cityList: [EncodableCity] = []
     lazy var fileManager = FileManager.default
     
@@ -22,7 +22,10 @@ class DocumentStorageController: StorageController {
         case couldNotFindDocumentsPath
     }
     
-    init() {
+    init(fileName: String = "cities.json") {
+        
+        self.fileName = fileName
+        
         do {
             // Attempt to read the cities from storage
             try self.readAllCities()
