@@ -64,4 +64,11 @@ class SortedList<T> {
         return self.elements.count
     }
 
+    func withOrderedBefore(orderedBefore: @escaping ((T, T) -> Bool)) -> SortedList {
+        return SortedList.init(
+            elements: self.elements,
+            orderedBefore: orderedBefore
+        )
+    }
+    
 }

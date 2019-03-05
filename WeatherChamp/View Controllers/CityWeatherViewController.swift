@@ -14,7 +14,9 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView?
     
-    var cityList: SortedList<Model.City>?
+    var cityList: SortedList<Model.City>? {
+        didSet { self.tableView?.reloadData() }
+    }
     
     // NOTE: This could be injected, for now we just instantiate it here
     lazy var storage: StorageController = DocumentStorageController()
@@ -25,11 +27,11 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         do {
+            // Get the cities from storage
             let unsortedCities = try self.storage.getCities()
-            self.cityList = SortedList.init(elements: unsortedCities, orderedBefore: { (x, y) -> Bool in
-                x.name < y.name
+            self.cityList = SortedList.init(elements: unsortedCities, orderedBefore: { (a, b) -> Bool in
+                CitySorter().isOrderedBeforeAlphabetically(cityA: a, cityB: b)
             })
-            self.tableView?.reloadData()
         } catch (let error) {
             // TODO: We could handle displaying an error to the user
         }
@@ -131,7 +133,9 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         do {
             let newCity = try self.storage.save(city: enteredCity)
             guard let index = self.cityList?.insert(element: newCity) else { return }
-            self.tableView?.insertRows(at: [IndexPath.init(row: index, section: 0)], with: .none)
+            let indexPath = IndexPath.init(row: index, section: 0)
+            self.tableView?.insertRows(at: [indexPath], with: .none)
+            self.tableView?.scrollToRow(at: indexPath, at: .middle, animated: true)
         } catch (_) {
             // Do nothing
         }
@@ -150,13 +154,18 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
             title: "None",
             style: .default,
             handler: { (_) in
-                
+                self.cityList = self.cityList?.withOrderedBefore(orderedBefore: { (a, b) -> Bool in
+                    CitySorter().isOrderedBeforeAlphabetically(cityA: a, cityB: b)
+                })
         }))
         
         alertCon.addAction(UIAlertAction(
             title: "Max Temperature",
             style: .default,
             handler: { (_) in
+                self.cityList = self.cityList?.withOrderedBefore(orderedBefore: { (a, b) -> Bool in
+                    CitySorter().isOrderedBeforeByMaxTemperature(cityA: a, cityB: b)
+                })
                 
         }))
         
@@ -164,7 +173,9 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
             title: "Min Temperature",
             style: .default,
             handler: { (_) in
-                
+                self.cityList = self.cityList?.withOrderedBefore(orderedBefore: { (a, b) -> Bool in
+                    CitySorter().isOrderedBeforeByMinTemperature(cityA: a, cityB: b)
+                })
         }))
         
         alertCon.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
