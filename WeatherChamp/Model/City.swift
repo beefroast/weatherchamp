@@ -42,5 +42,14 @@ extension Model {
             self.maxTemperature = maxTemperature
             self.humidity = humidity
         }
+        
+        // Utility method for stringifiying temperature/humidity values
+        static func displayableValueFrom(hundredths: Int) -> String {
+            // We could optionally show less significant digits, but
+            // let's be consistent for the time being.
+            let fractionalPart = hundredths % 100
+            let degrees = hundredths / 100
+            return "\(degrees).\(fractionalPart)"
+        }
     }
 }

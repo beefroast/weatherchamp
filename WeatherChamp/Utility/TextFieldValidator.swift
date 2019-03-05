@@ -14,6 +14,8 @@ class TextFieldValidator {
     enum InputError: Error {
         case required
         case invalidNumber
+        case valueExceedsMinimum(Int)
+        case valueExceedsMaximum(Int)
     }
     
     private func validateExists(textField: UITextField?) throws -> String {
@@ -29,8 +31,12 @@ class TextFieldValidator {
         }
         return text
     }
+    
 
-    private func validateNumber(text: String) throws -> Int {
+    private func validateNumber(
+        text: String,
+        minimumValue: Int,
+        maximumValue: Int) throws -> Int {
         
         // Regex matches numerical entry of an optional minus sign,
         // followed by some amount of digits, optionally followed
@@ -65,11 +71,19 @@ class TextFieldValidator {
             throw InputError.invalidNumber
         }
         
+        guard number >= minimumValue else {
+            throw InputError.valueExceedsMinimum(minimumValue)
+        }
+        
+        guard number <= maximumValue else {
+            throw InputError.valueExceedsMaximum(maximumValue)
+        }
+        
         return number
     }
     
     
-    func validateCityName(textField: UITextField, onError: ((Error) -> (Void))) -> String? {
+    func validateCityName(textField: UITextField?, onError: ((Error) -> (Void))) -> String? {
         do {
             let text = try self.validateExists(textField: textField)
             return try validateNotEmpty(text: text)
@@ -79,10 +93,14 @@ class TextFieldValidator {
         }
     }
     
-    func validateTemperature(textField: UITextField, onError: ((Error) -> (Void))) -> String? {
+    func validateNumeric(
+        textField: UITextField?,
+        minimumValue: Int,
+        maximumValue: Int,
+        onError: ((Error) -> (Void))) -> Int? {
         do {
             let text = try self.validateExists(textField: textField)
-            return try validateNotEmpty(text: text)
+            return try validateNumber(text: text, minimumValue: minimumValue, maximumValue: maximumValue)
         } catch (let error) {
             onError(error)
             return nil

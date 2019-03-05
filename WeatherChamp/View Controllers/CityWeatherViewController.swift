@@ -54,14 +54,6 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         return "\(condition)"
     }
     
-    func displayableValueFrom(hundredths: Int) -> String {
-        // We could optionally show less significant digits, but
-        // let's be consistent for the time being.
-        let fractionalPart = hundredths % 100
-        let degrees = hundredths / 100
-        return "\(degrees).\(fractionalPart)"
-    }
-    
     // MARK: - UITableViewDelegate/DataSource Implementation
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,9 +74,9 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         // TODO: This could be moved, it'll be fine here for now...
         cell.lblCityTitle?.text = city.name
         cell.lblWeatherType?.text = self.weatherDescriptionFor(condition: city.condition)
-        cell.lblHumidity?.text = "\(self.displayableValueFrom(hundredths: city.humidity))%"
-        cell.lblMinimumTemp?.text = "\(self.displayableValueFrom(hundredths: city.minTemperature))°"
-        cell.lblMaximumTemp?.text = "\(self.displayableValueFrom(hundredths: city.maxTemperature))°"
+        cell.lblHumidity?.text = "\(Model.City.displayableValueFrom(hundredths: city.humidity))%"
+        cell.lblMinimumTemp?.text = "\(Model.City.displayableValueFrom(hundredths: city.minTemperature))°C"
+        cell.lblMaximumTemp?.text = "\(Model.City.displayableValueFrom(hundredths: city.maxTemperature))°C"
         
         return cell
     }

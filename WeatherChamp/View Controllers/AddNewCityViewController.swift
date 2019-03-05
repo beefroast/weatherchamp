@@ -17,6 +17,8 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
 
     weak var delegate: AddNewCityViewControllerDelegate? = nil
     
+    lazy var validator = TextFieldValidator()    // This could be injected
+    
     // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView?
     
@@ -42,6 +44,14 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
         self.txtMinimumTemperature,
         self.txtMaximumTemperature,
         self.txtHumidity
+    ]
+    
+    lazy var orderedErrorFields = [
+        self.lblCityNameError,
+        self.lblWeatherConditionsError,
+        self.lblMinimumTemperatureError,
+        self.lblMaximumTemperatureError,
+        self.lblHumidityError,
     ]
     
     var selectedWeatherCondition: Model.City.Condition? = nil {
@@ -129,6 +139,7 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
 
     // MARK: - Keyboard notification handling
     
+    
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -146,6 +157,12 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
     }
     
     // MARK: - UITextFieldDelegate Implementation
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Hide the error label
+        guard let idx = self.orderedTextFields.firstIndex(where: { $0 === textField }) else { return }
+        self.orderedErrorFields[idx]?.isHidden = true
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
@@ -178,19 +195,96 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
     
     // MARK: - Actions
     
+
+    
     @IBAction func onAddCityPressed(_ sender: Any) {
         
-        // TODO: Validate the input...
+        self.view.endEditing(true)
+        
+        // Validate that the input has been entered correctly.
+        
+        let mCityName = self.validator.validateCityName(
+            textField: self.txtCityName,
+            onError: validationErrorHandlerWith(errorLabel: self.lblCityNameError)
+        )
+        
+        let mCondition = self.selectedWeatherCondition
+        
+        let mMinTemp = self.validator.validateNumeric(
+            textField: self.txtMinimumTemperature,
+            minimumValue: -27315,
+            maximumValue: 10000,
+            onError: validationErrorHandlerWith(errorLabel: self.lblMinimumTemperatureError)
+        )
+        
+        let mMaxTemp = self.validator.validateNumeric(
+            textField: self.txtMaximumTemperature,
+            minimumValue: -27315,
+            maximumValue: 10000,
+            onError: validationErrorHandlerWith(errorLabel: self.lblMaximumTemperatureError)
+        )
+        
+        let mHumidity = self.validator.validateNumeric(
+            textField: self.txtHumidity,
+            minimumValue: 0,
+            maximumValue: 20000,
+            onError: validationErrorHandlerWith(errorLabel: self.lblMaximumTemperatureError)
+        )
+        
+        if let maxTemp = mMaxTemp, let minTemp = mMinTemp {
+            // Double check that the maximum temperature is greater than the minimum temperature
+            guard maxTemp >= minTemp else {
+                self.lblMinimumTemperatureError?.text = "Minimum temperature must be less than or equal to maximum temperature."
+                self.lblMinimumTemperatureError?.isHidden = false
+                return
+            }
+        }
+        
+        // Ensure that we have all validated inputs
+        
+        guard let cityName = mCityName,
+            let condition = mCondition,
+            let minTemp = mMinTemp,
+            let maxTemp = mMaxTemp,
+            let humidity = mHumidity else {
+                return
+        }
+  
         
         let enteredCity = Model.City.init(
-            name: self.txtCityName?.text ?? "Unnamned",
-            condition: self.selectedWeatherCondition!,
-            minTemperature: 1234,
-            maxTemperature: 2345,
-            humidity: 3456
+            name: cityName,
+            condition: condition,
+            minTemperature: minTemp,
+            maxTemperature: maxTemp,
+            humidity: humidity
         )
         
         self.delegate?.addNewCity(vc: self, enteredCity: enteredCity)
+    }
+    
+    // MARK: - Validation error handling
+    
+    func validationErrorHandlerWith(errorLabel: UILabel?) -> ((Error) -> (Void)) {
+        return { (error) in
+            errorLabel?.text = self.labelTextFor(error: error)
+            errorLabel?.isHidden = false
+        }
+    }
+    
+    func labelTextFor(error: Error) -> String {
+        guard let err = error as? TextFieldValidator.InputError else {
+            return "An unknown error has occured"
+        }
+        switch err {
+        case .required:
+            return "Required"
+        case .invalidNumber:
+            return "Please enter a valid number"
+        case .valueExceedsMinimum(let min):
+            return "Value must be greater than or equal to \(Model.City.displayableValueFrom(hundredths: min))"
+        case .valueExceedsMaximum(let max):
+            return "Value must be less than or equal to \(Model.City.displayableValueFrom(hundredths: max))"
+        }
     }
     
 
