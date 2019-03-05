@@ -11,8 +11,12 @@ import Foundation
 // Very simple sorted list implementation that takes advantage of Swift's sort
 class SortedList<T> {
 
-    var elements: [T]
-    let orderedBefore: ((T, T) -> Bool)
+    fileprivate var elements: [T]
+    fileprivate let orderedBefore: ((T, T) -> Bool)
+    
+    var asArray: [T] {
+        get { return elements }
+    }
     
     init(elements: [T], orderedBefore: @escaping ((T, T) -> Bool)) {
         self.orderedBefore = orderedBefore
@@ -22,17 +26,18 @@ class SortedList<T> {
     func indexToInsert(element: T) -> Int {
         
         var lower = 0
-        var upper = self.elements.count
+        var upper = self.elements.count - 1
         
-        while lower < upper {
+        while lower <= upper {
             
             let mid = (lower+upper)/2
+            let compare = elements[mid]
             
-            if orderedBefore(element, elements[mid]) {
+            if orderedBefore(element, compare) {
                 // The element comes before mid in the list
                 upper = mid - 1
                 
-            } else if orderedBefore(elements[mid], element) {
+            } else if orderedBefore(compare, element) {
                 // The element comes after mid in the list
                 lower = mid + 1
                 

@@ -21,9 +21,20 @@ class TestTextFieldValidator: XCTestCase {
         self.validator = TextFieldValidator()
         self.textField = UITextField()
     }
+
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    
+    func testNilTextFieldErrors() {
+        
+        let expectation = self.expectation(description: "Error callback is entered")
+        
+        let name = validator.validateCityName(textField: nil) { (error) -> (Void) in
+            expectation.fulfill()
+        }
+        
+        self.waitForExpectations(timeout: 0.1, handler: nil)
+        XCTAssertNil(name)
     }
     
     func testCityNameValidationHappyPath() {
