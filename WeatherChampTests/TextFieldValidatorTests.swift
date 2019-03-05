@@ -12,7 +12,7 @@ import Foundation
 import XCTest
 @testable import WeatherChamp
 
-class TestTextFieldValidator: XCTestCase {
+class TextFieldValidatorTests: XCTestCase {
     
     var validator: TextFieldValidator!
     var textField: UITextField!
