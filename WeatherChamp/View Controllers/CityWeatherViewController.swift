@@ -137,4 +137,35 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
 
+    // MARK: - Actions
+    
+    @IBAction func onSortPressed(_ sender: Any) {
+        
+        let alertCon = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
+        
+        alertCon.addAction(UIAlertAction(
+            title: "None",
+            style: .default,
+            handler: { (_) in
+                
+        }))
+        
+        alertCon.addAction(UIAlertAction(
+            title: "Max Temperature",
+            style: .default,
+            handler: { (_) in
+                
+        }))
+        
+        alertCon.addAction(UIAlertAction(
+            title: "Min Temperature",
+            style: .default,
+            handler: { (_) in
+                
+        }))
+        
+        alertCon.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alertCon, animated: true, completion: nil)
+    }
 }

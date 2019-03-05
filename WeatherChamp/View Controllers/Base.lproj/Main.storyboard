@@ -160,7 +160,11 @@
                         <viewLayoutGuide key="safeArea" id="Kud-GG-EaU"/>
                     </view>
                     <navigationItem key="navigationItem" id="2MK-W6-f96">
-                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="KLf-qR-H6h"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="KLf-qR-H6h">
+                            <connections>
+                                <action selector="onSortPressed:" destination="MLh-vQ-GmN" id="V22-f6-G5q"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="s7u-JB-idr">
                             <connections>
                                 <segue destination="3lb-dn-X9y" kind="show" id="Izo-Ex-Bsu"/>
