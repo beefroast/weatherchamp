@@ -17,6 +17,13 @@ I decided to store City data in a simple JSON format in the documents folder, as
 I usually opt not to disallow characters from being entered into UITextFields, as it can make it very difficult for people with external input devices (such as Braille Readers) to correctly enter data. I guide the user by presenting the keyboard that best suits the task, but then validate on what they've entered.
 
 
+## Potential Improvements
+While writing this I made a bunch of decisions, mostly for the sake of simplicity that could be improved in future work. A 2-4 hour estimate of time is a little frugal, but I did want to get a slick, if not extremely Spartan, user experience.
+
+- Could show a message if there are currently no cities.
+- Asynchronous data fetching, went for the synchronous route mostly to keep it simple
+- Actual UUIDs on the City model object, I'm using a 'good enough' solution for now, but it's not difficult to implement.
+- More code coverage on UIViewController subclasses.
 
 -----
 Thanks for you time
