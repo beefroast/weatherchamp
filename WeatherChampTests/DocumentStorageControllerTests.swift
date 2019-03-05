@@ -12,6 +12,10 @@ import XCTest
 class DocumentStorageControllerTests: XCTestCase {
 
     
+    // NOTE: This could be generised to test the Protocol StorageController
+    // instead of DocumentStorageController, and then those tests could be
+    // applied to DocumentStorageController.
+    
     let filename = "test_cities.json"
     var storage: DocumentStorageController!
     
