@@ -58,7 +58,15 @@ class TextFieldValidator {
 
             case 2:
                 if let x = Int(components[0]), let y = Int(components[1]) {
+                    
+                    // Need to account for the first component being negative, if it is, we
+                    // add the numbers together as positive numbers and then take the negative
+                    
+                    if x < 0 {
+                        result = -(abs(x) * 100 + y)
+                    } else {
                         result = x * 100 + y
+                    }
                 } else {
                     result = nil
                 }
