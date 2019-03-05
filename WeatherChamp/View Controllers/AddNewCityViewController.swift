@@ -74,9 +74,19 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name:UIResponder.keyboardWillHideNotification, object: nil)
         
-        // Set up the custom pickers for the inputs
+        // Set up the custom pickers for the conditions input
         self.setupConditionsPicker()
         self.selectedWeatherCondition = Model.City.Condition.allCases.first
+        
+        // Add toolbars to condition and numeric inputs
+        [
+            self.txtWeatherConditions,
+            self.txtMinimumTemperature,
+            self.txtMaximumTemperature,
+            self.txtHumidity
+        ].compactMap({ return $0 }).forEach { (textField) in
+            self.addToolbarWithNextButtonTo(textField: textField)
+        }
         
         // Remember what the default scroll view bottom inset is
         self.scrollViewBottomInset = self.scrollView?.contentInset.bottom ?? 0
@@ -95,8 +105,12 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
         picker.delegate = self
         picker.dataSource = self
         
+        self.txtWeatherConditions?.inputView = picker
+    }
+    
+    func addToolbarWithNextButtonTo(textField: UITextField) {
+        
         let toolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
-        toolbar.sizeToFit()
         
         let nextButton = UIBarButtonItem(
             title: "Next",
@@ -107,8 +121,9 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
         
         toolbar.items = [nextButton]
         
-        self.txtWeatherConditions?.inputView = picker
-        self.txtWeatherConditions?.inputAccessoryView = toolbar
+        toolbar.sizeToFit()
+        
+        textField.inputAccessoryView = toolbar
     }
     
     @objc func onToolbarNextPressed(sender: Any?) -> Void {
@@ -167,6 +182,17 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
         self.orderedErrorFields[idx]?.isHidden = true
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        switch textField {
+        case self.txtCityName: _ = self.validateCityName()
+        case self.txtWeatherConditions: break
+        case self.txtMinimumTemperature: _ = self.validateMinimumTemperature()
+        case self.txtMaximumTemperature: _ = self.validateMaximumTemperature()
+        case self.txtHumidity: _ = self.validateHumidity()
+        default: break
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
         DispatchQueue.main.async {
@@ -187,8 +213,8 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
         let nextIdx = textFieldIndex + 1
         
         guard nextIdx < self.orderedTextFields.count else {
-            // There is no next text field, we just dismiss the keyboard
-            self.view.endEditing(true)
+            // There is no next text field so we just resign first responder
+            after.resignFirstResponder()
             return
         }
         
@@ -197,7 +223,6 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
     
     
     // MARK: - Actions
-    
 
     
     @IBAction func onAddCityPressed(_ sender: Any) {
@@ -206,33 +231,11 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
         
         // Validate that the input has been entered correctly.
         
-        let mCityName = self.validator.validateCityName(
-            textField: self.txtCityName,
-            onError: validationErrorHandlerWith(errorLabel: self.lblCityNameError)
-        )
-        
+        let mCityName = validateCityName()
         let mCondition = self.selectedWeatherCondition
-        
-        let mMinTemp = self.validator.validateNumeric(
-            textField: self.txtMinimumTemperature,
-            minimumValue: -27315,
-            maximumValue: 10000,
-            onError: validationErrorHandlerWith(errorLabel: self.lblMinimumTemperatureError)
-        )
-        
-        let mMaxTemp = self.validator.validateNumeric(
-            textField: self.txtMaximumTemperature,
-            minimumValue: -27315,
-            maximumValue: 10000,
-            onError: validationErrorHandlerWith(errorLabel: self.lblMaximumTemperatureError)
-        )
-        
-        let mHumidity = self.validator.validateNumeric(
-            textField: self.txtHumidity,
-            minimumValue: 0,
-            maximumValue: 20000,
-            onError: validationErrorHandlerWith(errorLabel: self.lblMaximumTemperatureError)
-        )
+        let mMinTemp = self.validateMinimumTemperature()
+        let mMaxTemp = self.validateMaximumTemperature()
+        let mHumidity = self.validateHumidity()
         
         if let maxTemp = mMaxTemp, let minTemp = mMinTemp {
             // Double check that the maximum temperature is greater than the minimum temperature
@@ -265,7 +268,41 @@ class AddNewCityViewController: UIViewController, UITextFieldDelegate, UIPickerV
         self.delegate?.addNewCity(vc: self, enteredCity: enteredCity)
     }
     
-    // MARK: - Validation error handling
+    // MARK: - Validation
+    
+    func validateCityName() -> String? {
+        return self.validator.validateCityName(
+            textField: self.txtCityName,
+            onError: validationErrorHandlerWith(errorLabel: self.lblCityNameError)
+        )
+    }
+    
+    func validateMinimumTemperature() -> Int? {
+        return self.validator.validateNumeric(
+            textField: self.txtMinimumTemperature,
+            minimumValue: -27315,
+            maximumValue: 10000,
+            onError: validationErrorHandlerWith(errorLabel: self.lblMinimumTemperatureError)
+        )
+    }
+    
+    func validateMaximumTemperature() -> Int? {
+        return self.validator.validateNumeric(
+            textField: self.txtMaximumTemperature,
+            minimumValue: -27315,
+            maximumValue: 10000,
+            onError: validationErrorHandlerWith(errorLabel: self.lblMaximumTemperatureError)
+        )
+    }
+    
+    func validateHumidity() -> Int? {
+        return self.validator.validateNumeric(
+            textField: self.txtHumidity,
+            minimumValue: 0,
+            maximumValue: 20000,
+            onError: validationErrorHandlerWith(errorLabel: self.lblHumidityError)
+        )
+    }
     
     func validationErrorHandlerWith(errorLabel: UILabel?) -> ((Error) -> (Void)) {
         return { (error) in

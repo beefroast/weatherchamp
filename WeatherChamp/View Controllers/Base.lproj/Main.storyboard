@@ -212,7 +212,7 @@
                                                                         <rect key="frame" x="0.0" y="21" width="327" height="30"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" textContentType="address-level2"/>
                                                                         <connections>
                                                                             <outlet property="delegate" destination="3lb-dn-X9y" id="WMA-UW-0mG"/>
                                                                         </connections>
@@ -264,7 +264,7 @@
                                                                         <rect key="frame" x="0.0" y="21" width="327" height="30"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="decimalPad"/>
                                                                         <connections>
                                                                             <outlet property="delegate" destination="3lb-dn-X9y" id="GtG-g7-vWZ"/>
                                                                         </connections>
@@ -290,7 +290,7 @@
                                                                         <rect key="frame" x="0.0" y="21" width="327" height="30"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="decimalPad"/>
                                                                         <connections>
                                                                             <outlet property="delegate" destination="3lb-dn-X9y" id="I1T-hA-hkD"/>
                                                                         </connections>
@@ -316,7 +316,7 @@
                                                                         <rect key="frame" x="0.0" y="21" width="327" height="30"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="decimalPad"/>
                                                                         <connections>
                                                                             <outlet property="delegate" destination="3lb-dn-X9y" id="7PM-bm-Uv6"/>
                                                                         </connections>
