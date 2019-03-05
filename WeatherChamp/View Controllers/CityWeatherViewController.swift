@@ -102,6 +102,9 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
                 preferredStyle: UIAlertController.Style.alert
             )
             
+            alertCon.popoverPresentationController?.sourceRect = tableView.rectForRow(at: indexPath)
+            alertCon.popoverPresentationController?.sourceView = tableView.cellForRow(at: indexPath)
+            
             alertCon.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (_) in
                 // Do nothing
             }))
@@ -142,7 +145,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
 
     // MARK: - Actions
     
-    @IBAction func onSortPressed(_ sender: Any) {
+    @IBAction func onSortPressed(_ sender: UIBarButtonItem) {
         
         let alertCon = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
         
@@ -173,6 +176,8 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
                     CitySorter().isOrderedBeforeByMinTemperature(cityA: a, cityB: b)
                 })
         }))
+    
+        alertCon.popoverPresentationController?.barButtonItem = sender
         
         alertCon.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
