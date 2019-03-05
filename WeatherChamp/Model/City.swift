@@ -49,7 +49,7 @@ extension Model {
             // let's be consistent for the time being.
             let fractionalPart = hundredths % 100
             let degrees = hundredths / 100
-            return "\(degrees).\(fractionalPart)"
+            return "\(degrees).\(abs(fractionalPart))"
         }
     }
 }
