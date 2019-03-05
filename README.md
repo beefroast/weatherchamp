@@ -18,12 +18,13 @@ I usually opt not to disallow characters from being entered into UITextFields, a
 
 
 ## Potential Improvements
-While writing this I made a bunch of decisions, mostly for the sake of simplicity that could be improved in future work. A 2-4 hour estimate of time is a little frugal, but I did want to get a slick, if not extremely Spartan, user experience.
+While writing this I made a bunch of decisions, mostly for the sake of simplicity that could be improved in future work. A 2-4 hour estimate of time is a little frugal (I spent roughly 8 or so hours), but I did want to get a slick, if not extremely Spartan, user experience.
 
 - Could show a message if there are currently no cities.
 - Asynchronous data fetching, went for the synchronous route mostly to keep it simple
 - Actual UUIDs on the City model object, I'm using a 'good enough' solution for now, but it's not difficult to implement.
 - More code coverage on UIViewController subclasses.
+- Images for each of the weather categories, currently it's just an empty UIImageView but I think the intention is clear.
 
 -----
 Thanks for you time
