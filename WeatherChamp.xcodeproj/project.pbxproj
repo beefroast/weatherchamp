@@ -22,6 +22,7 @@
 		64533DE9222CD7F900AB87BB /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64533DE8222CD7F900AB87BB /* City.swift */; };
 		64533DEB222CDF7C00AB87BB /* AddNewCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64533DEA222CDF7C00AB87BB /* AddNewCityViewController.swift */; };
 		64C0B5B1222DE73700B4EA99 /* TextFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C0B5B0222DE73700B4EA99 /* TextFieldValidator.swift */; };
+		64C0B5B3222DFDE000B4EA99 /* SortedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C0B5B2222DFDE000B4EA99 /* SortedList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		64533DE8222CD7F900AB87BB /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		64533DEA222CDF7C00AB87BB /* AddNewCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCityViewController.swift; sourceTree = "<group>"; };
 		64C0B5B0222DE73700B4EA99 /* TextFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidator.swift; sourceTree = "<group>"; };
+		64C0B5B2222DFDE000B4EA99 /* SortedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				64C0B5B0222DE73700B4EA99 /* TextFieldValidator.swift */,
+				64C0B5B2222DFDE000B4EA99 /* SortedList.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				64C0B5B1222DE73700B4EA99 /* TextFieldValidator.swift in Sources */,
 				64533DE7222CD7ED00AB87BB /* Model.swift in Sources */,
 				64533DE2222CD24B00AB87BB /* CityWeatherViewController.swift in Sources */,
+				64C0B5B3222DFDE000B4EA99 /* SortedList.swift in Sources */,
 				64533DE9222CD7F900AB87BB /* City.swift in Sources */,
 				640B5A26222CEAD800D87A09 /* StorageController.swift in Sources */,
 				640B5A28222CEB5D00D87A09 /* DocumentStorageController.swift in Sources */,
