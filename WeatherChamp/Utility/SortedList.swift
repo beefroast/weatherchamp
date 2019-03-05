@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Very simple sorted list implementation that takes advantage of the input sort
+// Very simple sorted list implementation that takes advantage of Swift's sort
 class SortedList<T> {
 
     var elements: [T]
@@ -58,6 +58,10 @@ class SortedList<T> {
     
     func remove(index: Int) {
         self.elements.remove(at: index)
+    }
+    
+    var count: Int {
+        return self.elements.count
     }
 
 }

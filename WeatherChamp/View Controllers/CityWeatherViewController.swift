@@ -14,7 +14,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView?
     
-    var cityList: [Model.City]?
+    var cityList: SortedList<Model.City>?
     
     // NOTE: This could be injected, for now we just instantiate it here
     lazy var storage: StorageController = DocumentStorageController()
@@ -25,7 +25,10 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         do {
-            self.cityList = try self.storage.getCities()
+            let unsortedCities = try self.storage.getCities()
+            self.cityList = SortedList.init(elements: unsortedCities, orderedBefore: { (x, y) -> Bool in
+                x.name < y.name
+            })
             self.tableView?.reloadData()
         } catch (let error) {
             // TODO: We could handle displaying an error to the user
@@ -109,7 +112,7 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 do {
                     try self.storage.delete(city: city)
-                    self.cityList?.removeAll(where: { $0 === city })
+                    self.cityList?.remove(index: indexPath.row)
                     self.tableView?.deleteRows(at: [indexPath], with: .none)
                 } catch (_) {
                     // TODO: Handle problem deleting in here...
@@ -127,8 +130,8 @@ class CityWeatherViewController: UIViewController, UITableViewDelegate, UITableV
         
         do {
             let newCity = try self.storage.save(city: enteredCity)
-            self.cityList?.insert(newCity, at: 0)
-            self.tableView?.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .none)
+            guard let index = self.cityList?.insert(element: newCity) else { return }
+            self.tableView?.insertRows(at: [IndexPath.init(row: index, section: 0)], with: .none)
         } catch (_) {
             // Do nothing
         }
